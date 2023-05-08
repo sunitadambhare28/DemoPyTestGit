@@ -50,4 +50,10 @@ class Test1:
           print("Test case failed")
           assert False
 
-
+ def test_square(self):
+     a =4
+     result = a*a
+     if(result == 16):
+         assert True
+     else:
+         assert False
