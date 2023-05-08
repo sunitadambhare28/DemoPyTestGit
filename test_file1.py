@@ -29,3 +29,15 @@ class Test_1 :
       else:
           print("test cases failed")
           assert False
+
+  def test_sub1(self):
+      a = 10
+      b = 5
+      c = a - b
+      if c == 5:
+          print("test cases passed")
+          assert True
+      else:
+          print("test cases failed")
+          assert False
+
