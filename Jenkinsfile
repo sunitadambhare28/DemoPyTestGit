@@ -10,15 +10,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'python -m pip install --upgrade pip'
-                sh 'pip install -r requirements.txt'
-                sh 'pip install pytest-html'
+                bat 'pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest -s -v --html=report/report.html --self-contained-html'
+                bat 'pytest -s -v --html=report/report.html --self-contained-html'
             }
         }
     }
