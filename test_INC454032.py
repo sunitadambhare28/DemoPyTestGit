@@ -34,7 +34,7 @@ class Test1:
       b = 20
       mul = a*b
       if(mul == 200):
-          print("Test passed")
+          print("**************Test passed*************")
           assert True
       else:
           print("Test case failed")
