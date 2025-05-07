@@ -10,13 +10,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-               powershell 'pip install -r requirements.txt'
+               bat 'pip install -r requirements.txt'
             }
         }
 
         stage('Run') {
             steps {
-                powershell 'pytest -s -v --html=report/report.html --self-contained-html'
+                bat 'pytest -s -v --html=report/report.html --self-contained-html'
             }
         }
     }
