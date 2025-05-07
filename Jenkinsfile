@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Run') {
             steps {
                 powershell 'pytest -s -v --html=report/report.html --self-contained-html'
             }
