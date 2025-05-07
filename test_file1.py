@@ -24,10 +24,10 @@ class Test_1 :
       b = 5
       c = a - b
       if c == 5:
-          print("test cases passed")
+          print("test case passed")
           assert True
       else:
-          print("test cases failed")
+          print("test case failed")
           assert False
 
   def test_sub1(self):
