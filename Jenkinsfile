@@ -1,36 +1,56 @@
 pipeline {
     agent any
 
+    environment {
+        // Define environment variables if needed
+        WORKSPACE_DIR = "${WORKSPACE}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/sunitadambhare28/DemoPyTestGit.git'
+                git url: 'https://github.com/sunitadambhare28/DemoPyTestGit.git', branch: 'master'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-               bat 'pip install -r requirements.txt'
+                script {
+                    // Upgrade pip and install dependencies
+                    bat 'cd %WORKSPACE% && python -m pip install --upgrade pip'
+                    bat 'cd %WORKSPACE% && pip install -r requirements.txt'
+                    bat 'cd %WORKSPACE% && pip install pytest-html'
+                }
             }
         }
 
-        stage('Run') {
+        stage('Run Tests') {
             steps {
-                bat 'pytest -s -v --html=report/report.html --self-contained-html'
+                script {
+                    // Run the tests with pytest and generate an HTML report
+                    bat 'cd %WORKSPACE% && pytest -s -v --html=report/report.html --self-contained-html'
+                }
+            }
+        }
+
+        stage('Archive HTML Report') {
+            steps {
+                script {
+                    // Archive the test report
+                    publishHTML(target: [
+                        reportName: 'Test Report',
+                        reportDir: 'report',
+                        reportFiles: 'report.html'
+                    ])
+                }
             }
         }
     }
 
     post {
         always {
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'report',
-                reportFiles: 'report.html',
-                reportName: 'Test Report'
-            ])
+            // Clean up workspace or any final steps
+            cleanWs()
         }
     }
 }
