@@ -20,3 +20,5 @@ class Test_1:
             print("test cases passed")
             assert False
 
+    def test_mul1(self):
+        assert True
