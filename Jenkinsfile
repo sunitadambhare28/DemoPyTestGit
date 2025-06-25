@@ -45,17 +45,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy') {
-            steps {
-                script {
-                    // Securely copy files to remote server
-                    bat 'scp %WORKSPACE%\\report\\report.html user@server:/deploy/path/'
-
-                    // OPTIONAL: SSH into server to perform further steps
-                    // bat 'ssh user@server "cd /deploy/path && do-something.sh"'
-                }
-            }
-        }
     }
 }
