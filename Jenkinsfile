@@ -49,4 +49,3 @@ pipeline {
 }
 
 
-#depoly is remaining
